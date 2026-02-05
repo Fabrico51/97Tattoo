@@ -1,0 +1,692 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+@font-face{
+  font-family: textos; /* set name */
+  src: url('../fonts/Montserrat-Italic-VariableFont_wght.ttf'); /* url of the font */
+}
+
+:root {
+  --preto: #2E2E2E;
+  --marrom-claro: #BFAB93;
+  --Creme: #FFF3D0;
+  --Rosa: #E999BF; 
+  --Rosa-escuro: #B3146D; 
+  --Rosa-claro: #FDBFD4; 
+  --Azul-bebê: #D2DAF3;
+  --Roxo: #A395D9; 
+  --Azul: #AEB4E9;
+}
+
+body{
+  background-color: var(--Creme);
+  background-image: url('../img/fundo.jpg');
+  color: var(--Rosa-escuro);
+  font-family: textos;
+}
+
+/* Header */
+.header{
+  background: linear-gradient(90deg, #D2DAF3, #FDBFD4);
+  height: 160px;
+  width: 100%;
+  text-align: center;
+}
+
+.logo{
+  width: 150px;
+  height: 150px;
+  background: var(--Rosa-escuro);
+  margin-top: 2px;
+  border-radius: 20px;
+  box-shadow: 6px 6px black;
+}
+
+
+
+
+
+
+
+.visuallyhidden {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  opacity: 0;
+}
+
+.tattoo{
+    width: 100%;
+    height: 100%;
+    border: double;
+    border-color:#325288;
+}
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 30vh;
+  min-height: 320px;
+  overflow: hidden;
+  background: #2E2E2E;
+}
+
+.carousel-track {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.2);
+}
+
+.slide-content {
+  position: absolute;
+  bottom: 15%;
+  left: 8%;
+  z-index: 2;
+  color: black;
+}
+
+.slide-content h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color:var(--Rosa-escuro);
+  margin-bottom: 0.5rem;
+}
+
+.slide-content p {
+  font-size: 1.3rem;
+  color: var(--Creme);
+}
+
+/* Barra de progresso */
+.progress-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 5px;
+  background: rgba(255, 243, 208, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #B3146D,
+    #E999BF,
+    #FDBFD4
+  );
+}
+
+.banner{
+  width:34%; 
+  height: 100%;
+}
+
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .carousel {
+    height: 60vh;
+  }
+  
+  .banner{
+    height: 100%;
+  }
+
+  .slide-content {
+    left: 1%;
+    bottom: 5%;
+  }
+}
+
+
+
+
+
+
+
+
+/* Cards */
+.cards {
+  display: flex;
+  justify-content: center;
+}
+
+.card-container {
+  display: flex;
+  text-align: center;
+  gap: 30px;
+  perspective: 1200px;
+  flex-wrap: wrap; /* importante para mobile */
+}
+.card {
+  width: 300px;
+  height: 160px;
+  background: var(--Rosa);
+  cursor: pointer;
+  box-shadow: 6px 6px 0 var(--Rosa-claro);
+  border-radius: 25px;
+  transition: all 0.6s ease;
+}
+
+.card.expanded {
+  width: 380px;       /* menor e mais elegante */
+  height: auto;       /* cresce conforme o texto */
+  min-height: 260px;  /* evita ficar pequeno demais */
+  z-index: 2;
+}
+
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+
+.card.expanded .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  overflow-y: auto;
+}
+
+.card-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--Azul-bebê);
+}
+
+.subtext{
+  color: var(--Creme);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  color: var(--Creme);
+  font-size: 14px;
+  line-height: 1.5;
+  max-height: 420px;
+  overflow-y: auto;
+
+}
+
+
+@media (max-width: 768px) {
+  .card {
+    width: 100vw;
+    
+  }
+
+  .card.expanded {
+    width: 100vw;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* Produtos */
+.produtos {
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+/* Linha superior */
+.produtos-topo {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Card base */
+.produto {
+  width: 280px;
+  min-height: 200px;
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 6px 6px 0 var(--Rosa-claro);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.produto:hover {
+  transform: translateY(-5px);
+}
+
+/* EM BREVE */
+.em-breve {
+  background: #ccc;
+  color: var(--preto);
+  background-image: url("breve.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  
+}
+
+.em-breve .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.em-breve h3 {
+  position: relative;
+  z-index: 1;
+}
+
+.tag {
+  position: absolute;
+  top: 15px;
+  left: -40px;
+  transform: rotate(-45deg);
+  background: var(--Rosa-escuro);
+  color: #fff;
+  padding: 5px 60px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 2;
+  text-align: center;
+}
+
+/* Piercing */
+.piercing{
+  background: var(--Rosa)
+}
+
+.piercing .descricao {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.piercing.active .descricao {
+  max-height: 200px;
+}
+
+/* Slide lateral */
+.slide-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 380px;
+  height: 100vh;
+  background: var(--Creme);
+  box-shadow: -6px 0 20px rgba(0,0,0,0.2);
+  padding: 30px 20px;
+  transition: right 0.5s ease;
+  z-index: 20;
+}
+
+.slide-panel.active {
+  right: 0;
+}
+
+.slide-panel img {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Carrossel vertical */
+.carousel-vertical {
+  position: relative;
+  height: 620px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.carousel-item {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.4s ease;
+}
+
+.carousel-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.carousel-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.carousel-controls button {
+  padding: 10px 14px;
+  border-radius: 50%;
+  border: none;
+  background: var(--Rosa);
+  color: white;
+  cursor: pointer;
+}
+
+
+/* Tatuagem (destaque) */
+.tatuagem {
+  width: 340px;
+  background: var(--Rosa);
+  color: #fff;
+  text-align: center;
+}
+
+.tattoo-img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 15px 0;
+}
+
+.tatuagem button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: var(--Rosa-escuro);
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  overflow: overlay;
+}
+
+.modal-content {
+  background: var(--Creme);
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.carousel button {
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  background: var(--Azul);
+  cursor: pointer;
+}
+
+.size-content {
+  flex: 1;
+}
+
+
+
+
+/* Tatuadoras */
+
+.cards-container {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+/* CARD */
+.cardtattoo {
+  width: 260px;
+  height: 340px;
+  perspective: 1200px;
+}
+
+.card-innertattoo {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.8s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* sombra animada */
+.cardtattoo:hover .card-innertattoo{
+  box-shadow: 0 20px 45px rgba(179, 20, 109, 0.35);
+}
+
+/* FLIP */
+.cardtattoo.is-flipped .card-innertattoo {
+  transform: rotateY(180deg);
+}
+
+/* FACES */
+.card-fronttattoo,
+.card-backtattoo {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+/* FRENTE */
+.card-fronttattoo {
+  background: var(--Rosa-claro);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-fronttattoo img {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.tattooimg{
+  width: 280px;
+  height: 300px;
+}
+
+.card-fronttattoo span {
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--Rosa-escuro);
+  color: white;
+  font-weight: bold;
+}
+
+/* VERSO */
+.card-backtattoo {
+  background: var(--Azul-bebê);
+  transform: rotateY(180deg);
+}
+
+.card-backtattoo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/*PERGUNTAS*/
+
+.faq-wrapper {
+  max-width: 620px;
+  margin: 50px auto;
+}
+
+.faq-wrapper h2 {
+  text-align: center;
+  color: var(--Rosa-escuro);
+  margin-bottom: 20px;
+}
+
+.faq-carousel {
+  max-height: 420px; /* ~5 perguntas */
+  overflow-y: auto;
+  padding: 16px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, var(--Azul), var(--Rosa-claro));
+  box-shadow: inset 0 6px 12px rgba(0,0,0,0.12);
+}
+
+.faq-item {
+  background: var(--Creme);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.faq-item.active {
+  box-shadow: 0 6px 18px rgba(233,153,191,0.35);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: var(--texto);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.faq-question span {
+  color: var(--Rosa-escuro);
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 16px;
+  font-size: 14px;
+  color: var(--texto);
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 220px;
+  padding: 0 16px 16px;
+}
+
+.faq-item.active .faq-question span {
+  transform: rotate(45deg);
+}
+
+
+/* RODAPE */
+.site-footer {
+  background: linear-gradient(90deg, #D2DAF3, #FDBFD4);
+  padding: 24px 0;
+  margin-top: 60px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  fill: #B3146D;
+  transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.15);
+  fill: #A395D9;
+}

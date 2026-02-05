@@ -1,0 +1,142 @@
+
+    :root {
+      --shadow: 8px 8px 0px #FDBFD4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+    }
+
+    body {
+      background-color: #D2DAF3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #A395D9;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid #FDBFD4;
+      padding: 40px 30px;
+      background-color: #FFF3D0;
+      box-shadow: var(--shadow);
+      position: relative;
+      border-radius: 12px;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: -6px;
+      bottom: -6px;
+      border: 1px #FDBFD4;
+      z-index: -1;
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #AEB4E9;
+      background-color: #FDBFD4;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    input:focus {
+      box-shadow: 4px 4px 0px #2E2E2E;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #E999BF;
+      color: white;
+      border: 2px solid #FDBFD4;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      box-shadow: 4px 4px 0px #2E2E2E;
+      transform: translate(-2px, -2px);
+      background-color: #B3146D;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+      color: #2E2E2E;
+      font-weight: bold;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 2px solid #2E2E2E;
+      margin: 0 10px;
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .social-btn {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #2E2E2E;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .social-btn:hover {
+      box-shadow: 4px 4px 0px #2E2E2E;
+      transform: translate(-2px, -2px);
+    }
+
+    .inkito{
+      width: 155px; 
+      height:120px;
+       position: absolute;
+       top: 450px;
+       left: 350px; /* Distância da esquerda */
+       z-index: 100; /* Garante que fique acima de outros elementos */
+    }

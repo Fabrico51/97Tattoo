@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Financeiro</title>
+  <link rel="stylesheet" href="financeiro.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+  --roxo-escuro: #6743A5;
+  --roxo: #7345D6;
+  --preto: #2E2E2E;
+  --marrom: #BFAB93;
+  --fundo: #594747;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--fundo);
+  color: white;
+}
+
+.finance-container {
+  padding: 20px;
+}
+
+.total-box {
+  background: var(--roxo-escuro);
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.total-box span {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.finance-content {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.finance-card {
+  background: var(--marrom);
+  color: var(--preto);
+  padding: 15px;
+  border-radius: 10px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.finance-card.full {
+  margin-top: 20px;
+}
+
+.fixed-item {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+input, button {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+button {
+  background: var(--roxo);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+li {
+  background: #fff;
+  margin-top: 5px;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions button {
+  width: auto;
+  margin-left: 5px;
+  padding: 4px 6px;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="finance-container">
+
+  <!-- SALDO TOTAL -->
+  <div class="total-box">
+    <h2>Saldo Total da Empresa</h2>
+    <span id="totalValue">R$ 0,00</span>
+  </div>
+
+  <!-- DESPESAS / RENDIMENTOS -->
+  <div class="finance-content">
+
+    <!-- DESPESAS -->
+    <div class="finance-card">
+      <h3>Despesas</h3>
+
+      <div class="fixed-item">
+        <strong>Folha Salarial</strong>
+        <span id="payrollValue">R$ 0,00</span>
+      </div>
+
+      <h4>Nova Despesa</h4>
+      <input type="number" id="expenseValue" placeholder="Valor">
+      <input type="text" id="expenseReason" placeholder="Justificativa">
+      <button onclick="addExpense()">Adicionar</button>
+
+      <ul id="expenseList"></ul>
+    </div>
+
+    <!-- RENDIMENTOS -->
+    <div class="finance-card">
+      <h3>Rendimentos</h3>
+
+      <div class="fixed-item">
+        <strong>Agenda</strong>
+        <span id="agendaValue">R$ 0,00</span>
+      </div>
+
+      <h4>Novo Ganho</h4>
+      <input type="number" id="incomeValue" placeholder="Valor">
+      <input type="text" id="incomeReason" placeholder="Justificativa">
+      <button onclick="addIncome()">Adicionar</button>
+
+      <ul id="incomeList"></ul>
+    </div>
+
+  </div>
+
+  <!-- HISTÓRICO -->
+  <div class="finance-card full">
+    <h3>Histórico Financeiro</h3>
+    <ul id="historyList"></ul>
+  </div>
+
+  <!-- GRÁFICO -->
+  <div class="finance-card full">
+    <h3>Rendimento Mensal</h3>
+    <canvas id="financeChart"></canvas>
+  </div>
+
+</div>
+
+<script>
+  let financial = JSON.parse(localStorage.getItem('financial')) || {
+  expenses: [],
+  incomes: [],
+  history: []
+};
+
+let chart;
+
+/* INTEGRAÇÕES */
+
+function getPayroll() {
+  const employees = JSON.parse(localStorage.getItem('employees')) || [];
+  return employees
+    .filter(e => e.status === 'Ativo')
+    .reduce((s, e) => s + Number(e.salary), 0);
+}
+
+function getAgendaIncome() {
+  const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+  return appointments
+    .filter(a => a.status === 'Concluído')
+    .reduce((s, a) => s + Number(a.value), 0);
+}
+
+/* CRUD FINANCEIRO */
+
+function addExpense() {
+  const value = Number(expenseValue.value);
+  const reason = expenseReason.value;
+
+  if (!value || !reason) return alert('Preencha os campos');
+
+  const item = { type: 'Despesa', value, reason, date: new Date() };
+  financial.expenses.push(item);
+  financial.history.unshift(item);
+
+  save();
+}
+
+function addIncome() {
+  const value = Number(incomeValue.value);
+  const reason = incomeReason.value;
+
+  if (!value || !reason) return alert('Preencha os campos');
+
+  const item = { type: 'Ganho', value, reason, date: new Date() };
+  financial.incomes.push(item);
+  financial.history.unshift(item);
+
+  save();
+}
+
+function editHistory(index) {
+  const item = financial.history[index];
+  const newValue = prompt('Novo valor:', item.value);
+  const newReason = prompt('Nova justificativa:', item.reason);
+
+  if (!newValue || !newReason) return;
+
+  item.value = Number(newValue);
+  item.reason = newReason;
+
+  save();
+}
+
+function deleteHistory(index) {
+  if (!confirm('Excluir lançamento?')) return;
+
+  financial.history.splice(index, 1);
+  save();
+}
+
+/* CÁLCULOS */
+
+function calculateTotal() {
+  const payroll = getPayroll();
+  const agenda = getAgendaIncome();
+
+  const manualIncome = financial.incomes.reduce((s, i) => s + i.value, 0);
+  const manualExpense = financial.expenses.reduce((s, e) => s + e.value, 0);
+
+  return manualIncome + agenda - manualExpense - payroll;
+}
+
+/* RENDER */
+
+function render() {
+  const payroll = getPayroll();
+  const agenda = getAgendaIncome();
+  const total = calculateTotal();
+
+  payrollValue.innerText = `R$ ${payroll.toFixed(2)}`;
+  agendaValue.innerText = `R$ ${agenda.toFixed(2)}`;
+  totalValue.innerText = `R$ ${total.toFixed(2)}`;
+
+  expenseList.innerHTML = financial.expenses
+    .map(e => `<li>- R$ ${e.value} | ${e.reason}</li>`).join('');
+
+  incomeList.innerHTML = financial.incomes
+    .map(i => `<li>+ R$ ${i.value} | ${i.reason}</li>`).join('');
+
+  historyList.innerHTML = financial.history
+    .map((h, i) => `
+      <li>
+        ${h.type}: R$ ${h.value} | ${h.reason}
+        <span class="actions">
+          <button onclick="editHistory(${i})">✏️</button>
+          <button onclick="deleteHistory(${i})">🗑️</button>
+        </span>
+      </li>
+    `).join('');
+
+  renderChart();
+}
+
+function renderChart() {
+  const ctx = document.getElementById('financeChart');
+
+  const months = {};
+  financial.incomes.forEach(i => {
+    const m = new Date(i.date).toLocaleString('pt-BR', { month: 'short' });
+    months[m] = (months[m] || 0) + i.value;
+  });
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(months),
+      datasets: [{
+        label: 'Ganhos Mensais',
+        data: Object.values(months),
+        backgroundColor: '#7345D6'
+      }]
+    }
+  });
+}
+
+function save() {
+  localStorage.setItem('financial', JSON.stringify(financial));
+  render();
+}
+
+render();
+
+</script>
+</body>
+</html>

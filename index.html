@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/home.css">
+    <title>97 tatto</title>
+</head>
+<body>
+  <header class="header">
+    <img src="img/logo.png" class="logo" alt="" />
+  </header>
+    
+
+    <section class="carousel">
+  <div class="carousel-track">
+    <div class="slide active">
+      <img src="img/banner1.jpg" alt="img/banner1.jpg" class="banner">
+    </div>
+
+    <div class="slide">
+      <img src="img/banner2.jpg" alt="img/banner2.jpg" class="banner">
+    </div>
+
+    <div class="slide">
+      <img src="img/banner3.jpg" alt="" class="banner" />
+    </div>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress"></div>
+  </div>
+</section>
+
+
+<h1 style="text-align: center; margin-bottom: 50px; margin-top: 50px;">Informações</h1>
+<section class="cards">
+
+  <div class="card-container">
+
+    <!-- Card 1 -->
+    <div class="card" onclick="toggleCard(this)">
+      <div class="card-inner">
+
+        <div class="card-front">
+          <h2>Sobre nós</h2>
+          <p class="subtext">Clique para conhecer nossa história</p>
+        </div>
+
+        <div class="card-back">
+          <p>
+            A 97Tattoo é uma empresa de tatuagem e piercing criada a partir da turma 3397,
+            que deu origem ao nome e à identidade da marca. O número 97 representa nossa
+            trajetória e o início de um projeto construído por jovens com o objetivo de
+            transformar a forma como a tatuagem é vista.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" onclick="toggleCard(this)">
+      <div class="card-inner">
+
+        <div class="card-front">
+          <h2>Funcionamento</h2>
+          <p class="subtext">Como trabalhamos</p>
+        </div>
+
+        <div class="card-back">
+          <p>
+            Trabalhamos com agendamento prévio para tatuagens e piercings,
+            garantindo organização, segurança e qualidade no atendimento.
+            Atuamos com os estilos fine line, nouveau, old school e cartoon,
+            em um ambiente profissional, acolhedor e livre de julgamentos.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" onclick="toggleCard(this)">
+      <div class="card-inner">
+
+        <div class="card-front">
+          <h2>Público-alvo</h2>
+          <p class="subtext">Para quem é a 97Tattoo</p>
+        </div>
+
+        <div class="card-back">
+          <p>
+            Nosso público é composto por jovens de 19 a 25 anos,
+            além de adolescentes de 16 e 17 anos, atendidos apenas
+            com autorização formal e responsável presente, garantindo
+            responsabilidade, segurança e transparência.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<h1 style="text-align: center; margin-top: 50px;">Produtos</h1>
+<section class="produtos">
+
+  <div class="produtos-topo">
+
+    <!-- EM BREVE -->
+    <div class="produto em-breve">
+      <span class="tag">EM BREVE</span>
+      <h3>Novidades</h3>
+      <img src="img/inkitoirritado.png" style="width: 180px; height: 160px; margin-left: 30px; margin-top:20px ;">
+      <p style="text-align:center;">Ta olhando o que?</p>
+    </div>
+
+    <!-- PIERCING -->
+    <div class="produto piercing" style="text-align: center">
+      <h3>Piercing</h3>
+
+      <div>
+        <p>
+          Perfurações feitas com materiais esterilizados,
+          joias de alta qualidade e profissionais experientes,
+          seguindo todas as normas de segurança.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TATUAGEM -->
+  <div class="produto tatuagem">
+    <h3>Tatuagem</h3>
+    <img src="img/Inkito.png" class="tattoo-img" >
+    <button onclick="openSlide()">Ver tamanhos</button>
+  </div>
+
+</section>
+
+<!-- SLIDE LATERAL -->
+<div class="slide-panel" id="slidePanel">
+
+  <button class="close" onclick="closeSlide()">✕</button>
+
+  <h3>Tamanhos de Tatuagem</h3>
+
+  <div class="carousel-vertical">
+
+    <div class="carousel-item active" data-size="small">
+      <h4>Pequena</h4>
+      <p>1 a 10 cm — ideal para pulso e atrás da orelha.</p>
+      <img src="img/pequeno.jpeg">
+    </div>
+
+    <div class="carousel-item" data-size="medium">
+      <h4>Média</h4>
+      <p>10 a 20 cm — perfeita para braço ou ombro.</p>
+      <img src="img/medio.jpeg">
+    </div>
+
+    <div class="carousel-item" data-size="large">
+      <h4>Grande</h4>
+      <p>Acima de 20 cm — costas ou coxa.</p>
+      <img src="img/grande.jpeg">
+    </div>
+
+  </div>
+
+  <div class="carousel-controls">
+    <button onclick="prevItem()">▲</button>
+    <button onclick="nextItem()">▼</button>
+  </div>
+
+</div>
+
+<h1 style="text-align: center;">Tatuadoras & Body Piercing</h1>
+<p style="text-align: center;">Clique no card para ver portifólio</p>
+<section>
+  <div class="cards-container">
+
+  <div class="cardtattoo">
+    <div class="card-innertattoo">
+      <div class="card-fronttattoo">
+        <img class="classtattoo" src="img/inkitoirritado.png" alt="Projeto 1">
+        <span>Sofia</span>
+      </div>
+      <div class="card-backtattoo">
+        <img src="img/portifolioSofia.jpg" alt="Portfólio 1">
+      </div>
+    </div>
+  </div>
+
+  <div class="cardtattoo">
+    <div class="card-innertattoo">
+      <div class="card-fronttattoo">
+        <img class="tattooimg" src="img/Inkito.png" alt="Projeto 2">
+        <span>Brenda</span>
+      </div>
+      <div class="card-backtattoo">
+        <img src="img/portifolioBrenda.jpg" alt="Portfólio 2">
+      </div>
+    </div>
+  </div>
+
+  <div class="cardtattoo">
+    <div class="card-innertattoo">
+      <div class="card-fronttattoo">
+        <img class="tattooimg" src="img/inkitoacenando2.png" alt="Projeto 3">
+        <span>Emily</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+
+  <section class="faq-wrapper">
+  <h2>Perguntas Frequentes</h2>
+
+  <div class="faq-carousel">
+
+    <!-- 1 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Devo ter cuidados especiais antes de fazer uma tatuagem?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Os maiores cuidados são feitos no pós-tatuagem. Como preparação, é importante hidratar bem a pele, alimentar-se antes da sessão e evitar consumo excessivo de álcool no dia anterior.
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Que cuidados devo ter depois de fazer uma tatuagem?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Mantenha a área limpa, aplique a pomada recomendada por pelo menos 15 dias e evite sol e imersão em água no primeiro mês.
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Preciso continuar cuidando da tatuagem mesmo depois de cicatrizada?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Sim. Use sempre protetor solar acima de FPS 30 e mantenha a pele hidratada para preservar cores e linhas.
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Quanto tempo leva para uma tatuagem cicatrizar?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Em média, de 20 a 40 dias. A cicatrização completa ocorre somente após a queda total das crostas.
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Coceira na tatuagem é normal?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Sim, é normal durante a cicatrização. Não coce, não arranhe e nunca arranque a crosta.
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Posso arrancar a crosta da tatuagem?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Não. Arrancar a crosta pode remover tinta e causar falhas na tatuagem.
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Posso usar hidratante corporal na tatuagem recém-feita?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Não. Utilize apenas a pomada recomendada pelo tatuador para evitar infecções ou reações.
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Tenho diabetes, posso fazer uma tatuagem?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Consulte seu médico antes. Se a diabetes estiver controlada, geralmente é possível.
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        A cor da tatuagem muda com o tempo?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Pode clarear levemente. Mudanças grandes geralmente ocorrem por falta de cuidados ou exposição ao sol.
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Emagrecer ou engordar altera a tatuagem?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Pequenas variações não interferem muito. Mudanças bruscas podem alterar o desenho.
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        O que é um flash tattoo?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        É um desenho pronto criado pelo artista, sem possibilidade de personalização.
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Posso fazer depilação a laser sobre a tatuagem?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Não. O laser pode causar queimaduras e desbotar a tatuagem.
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Todo tatuador faz qualquer estilo?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Geralmente não. Cada artista possui uma linha de trabalho específica.
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Preciso agendar para fazer piercing?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        É altamente recomendável agendar. Atendimentos sem horário dependem da disponibilidade.
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Colocar piercing dói?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Dói por poucos segundos. Normalmente é menos doloroso do que se imagina.
+      </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Quanto tempo demora para fazer o piercing?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        A perfuração leva segundos. O processo completo dura entre 10 e 20 minutos.
+      </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Quanto tempo leva para cicatrizar um piercing?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Pode levar meses ou até um ano. Continue os cuidados mesmo após parecer cicatrizado.
+      </div>
+    </div>
+
+    <!-- 18 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Quando posso trocar a joia do piercing?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Após pelo menos 8 semanas. Alguns piercings possuem exceções. Oferecemos serviço de troca mediante taxa.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-content">
+
+    <a href="https://wa.me/5599999999999" target="_blank" aria-label="WhatsApp">
+      <svg viewBox="0 0 32 32" class="icon whatsapp">
+        <path d="M16 2.9C8.8 2.9 3 8.7 3 15.9c0 2.5.7 4.9 2 7l-2.1 6.2 6.4-2c2 1.1 4.3 1.7 6.7 1.7 7.2 0 13-5.8 13-13S23.2 2.9 16 2.9zm0 23.7c-2.1 0-4.2-.6-6-1.7l-.4-.2-3.8 1.2 1.2-3.7-.2-.4c-1.2-1.9-1.8-4.1-1.8-6.3C5 9.8 9.8 5 16 5s11 4.8 11 10.9-4.8 10.7-11 10.7zm6-8.1c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.3-.6.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.4.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.6-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.3 3c.2.2 2.2 3.3 5.4 4.7.7.3 1.3.5 1.8.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.1-.3-.2-.6-.4z"/>
+      </svg>
+    </a>
+
+    <a href="https://www.instagram.com/97tatto?igsh=MXQ4OWRwb3R2NzF3ag==" target="_blank" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" class="icon instagram">
+        <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm0 7.6A2.8 2.8 0 1 1 14.8 12 2.8 2.8 0 0 1 12 14.8zM17.4 5.6a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1z"/>
+      </svg>
+    </a>
+
+  </div>
+</footer>
+
+
+
+    <script src="JS/home.js"></script>
+
+</body>
+</html>
