@@ -2,11 +2,11 @@
   --preto: #2E2E2E;
   --marrom-claro: #BFAB93;
   --Creme: #FFF3D0;
-  --Rosa: #E999BF; 
-  --Rosa-escuro: #B3146D; 
-  --Rosa-claro: #FDBFD4; 
+  --Rosa: #E999BF;
+  --Rosa-escuro: #B3146D;
+  --Rosa-claro: #FDBFD4;
   --Azul-bebê: #D2DAF3;
-  --Roxo: #A395D9; 
+  --Roxo: #A395D9;
   --Azul: #AEB4E9;
 }
 
@@ -23,6 +23,7 @@ body {
   height: 100%;
   min-height: 100vh;
   background: var(--Azul-bebê);
+  background-image: url('../../img/fundo.jpg');
   color: var(--Roxo);
 
 }
@@ -48,6 +49,7 @@ body {
   color: var(--Roxo);
   transition: width 0.3s;
   overflow: hidden;
+  box-shadow: 6px 6px 6px var(--Roxo);
 }
 
 .sidebar.collapsed {
@@ -56,7 +58,7 @@ body {
 
 .logo {
   text-align: center;
-  padding: 10px;
+  margin-right: 5px;
   font-size: 24px;
   font-weight: bold;
 }
@@ -113,6 +115,7 @@ body {
 .content {
   flex: 1;
   padding: 30px;
+  justify-content: center;
 }
 
 .page {
@@ -163,7 +166,7 @@ body {
   text-align: center;
   border-radius: 10px;
   margin-bottom: 20px;
-  box-shadow: 6px 6px 0 var(--Azul);
+  box-shadow: 6px 6px 6px var(--Azul);
 }
 
 .total-box span {
@@ -184,7 +187,7 @@ body {
   padding: 15px;
   border-radius: 10px;
   box-sizing: border-box;
-  box-shadow: 6px 6px 0px var(--Azul);
+  box-shadow: 6px 6px 6px var(--Azul);
 }
 
 .finance-card h3 {
@@ -200,11 +203,32 @@ body {
   margin-bottom: 10px;
 }
 
-.inputfinance {
-  box-sizing: border-box;
-  margin: 5px;
+.finance-card input {
+  color: var(--preto);
+  box-shadow: 2px 2px var(--Azul);
+  border-radius: 5px;
+  margin: 10px;
   max-width: 100%;
-  font-size: 14px;
+  font-size: 16px;
+}
+
+.finance-card button {
+  background-color: var(--Rosa-escuro);
+  border-style: none;
+  margin-bottom: 5px;
+  display: flex;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
+}
+
+.finance-card button:hover {
+  background-color: var(--Rosa-claro);
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
 }
 
 .finance-container button {
@@ -220,6 +244,71 @@ body {
 
 
 
+
+
+/* HOME */
+.container {
+  margin-left: 30%;
+  background: var(--Rosa-claro);
+  width: 420px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 6px 6px 6px var(--Azul);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-left: 20%;
+  }
+
+}
+
+.container img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.container h1 {
+  color: var(--Rosa-escuro);
+  margin-bottom: 10px;
+}
+
+.container h2 {
+  color: var(--preto);
+  font-weight: normal;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.buttons button {
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--Creme);
+  color: var(--Rosa-escuro);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.buttons button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  background: var(--Rosa);
+}
+
+
+
 /* CALENDARIO */
 
 
@@ -230,7 +319,7 @@ body {
   background: var(--Rosa-claro);
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 6px 6px 0 var(--preto);
+  box-shadow: 5px 5px 5px var(--Azul);
 }
 
 .calendar-header {
@@ -253,7 +342,7 @@ body {
   cursor: pointer;
 }
 
-.arrow:hover{
+.arrow:hover {
   background-color: var(--Azul);
 }
 
@@ -293,7 +382,8 @@ body {
   border: none;
   border-radius: 20px;
   background-color: var(--roxo);
-  color: var(--Rosa);;
+  color: var(--Rosa);
+  ;
 }
 
 .scheduling:hover {
@@ -348,7 +438,7 @@ body {
   padding: 20px;
   width: 320px;
   border-radius: 12px;
-  box-shadow: 6px 6px 0 var(--preto);
+  box-shadow: 6px 6px 6px var(--preto);
 }
 
 .modal-content input,
@@ -414,131 +504,129 @@ body {
 
 /* FUNCIONÁRIOS */
 
-.summary {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 15px;
-  margin-top: 20px;
-}
 
-.summary div {
-  background: white;
-  padding: 10px;
-  border: 2px solid var(--preto);
-  flex: 1;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  border: 1px solid var(--preto);
-  padding: 8px;
-  text-align: center;
-}
-
-th {
-  border: none;
+#btnNovo {
   background: var(--Rosa-escuro);
   color: white;
-}
-
-.actions button {
-  margin: 0 3px;
-}
-
-.newEmploye {
-  width: 40%;
-  border: outset black;
-  border-radius: 100px;
-  margin-bottom: 10px;
-  background-color: var(--Rosa-claro);
-  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-.newEmploye:hover {
-  background-color: var(--Rosa-escuro);
-  box-shadow: 4px 4px 0px #2E2E2E;
-  transform: translate(-2px, -2px);
-}
-
-/* MODAL */
 .modalEmploye {
+  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, .6);
-  display: none;
-  align-items: center;
+  background: rgba(0, 0, 0, 0.45);
   justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
 }
 
-.modalEmploye-content {
+.modalEmploye form {
+  background: var(--Creme);
   padding: 20px;
-  width: 320px;
   border-radius: 12px;
-  box-shadow: 6px 6px 0 var(--preto);
-
-  background-color: var(--marrom-claro);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
 }
 
-.modalEmploye-content input,
-.modalEmploye-content select {
-  width: 100%;
+.modalEmploye input,
+.modalEmploye select {
   padding: 8px;
-  margin-bottom: 10px;
-  border: 2px solid var(--preto);
+  border-radius: 6px;
+  border: 1px solid var(--Marrom-claro);
 }
 
-.modalEmploye-actions {
+.cardsEmploye {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cardEmploye {
+  background: var(--Rosa-claro);
+  border-radius: 16px;
+  padding: 15px;
+  width: 320px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  box-shadow: 6px 6px 6px var(--Azul);
+}
+
+.cardEmploye img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: white;
+}
+
+.cardEmploye .info {
+  color: var(--preto);
+}
+
+.cardEmploye .info h3 {
+  margin: 0;
+  color: var(--Rosa-escuro);
+}
+
+.setores {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.setor h2 {
+  text-align: center;
+  color: var(--Rosa-escuro);
+  background: var(--Rosa-claro);
+  border-radius: 20px;
+  box-shadow: 6px 6px 6px var(--Azul);
+}
+
+.setor .cardsEmploye {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* ✨ ANIMAÇÃO DE ENTRADA */
+.cardEmploye {
+  animation: aparecer 0.4s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cardEmploye .acoes {
+  margin-top: 8px;
   display: flex;
   gap: 6px;
-
 }
 
-.modalEmploye-actions button {
-  flex: 1;
-  padding: 8px;
-  border: 2px solid var(--preto);
+.cardEmploye button {
+  background: var(--Rosa);
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 12px;
 }
 
-#employeeTable {
-  background-color: var(--Creme);
-}
-
-.danger-employe {
-  background: #8b0000;
-  color: white;
-}
-
-.danger-employe:hover {
-  background-color: #740000;
-  box-shadow: 4px 4px 0px #2E2E2E;
-  transform: translate(-2px, -2px);
-}
-
-.cancel-employe {
-  background: orange;
-  color: white;
-}
-
-.cancel-employe:hover {
-  background-color: orangered;
-  box-shadow: 4px 4px 0px #2E2E2E;
-  transform: translate(-2px, -2px);
-}
-
-.save-employe {
-  background-color: greenyellow;
-  color: white;
-}
-
-.save-employe:hover {
-  background-color: green;
-  box-shadow: 4px 4px 0px #2E2E2E;
-  transform: translate(-2px, -2px);
+.cardEmploye button.excluir {
+  background: #ff6b6b;
 }

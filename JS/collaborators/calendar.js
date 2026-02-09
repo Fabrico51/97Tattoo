@@ -103,6 +103,32 @@ function loadTimes(current = null) {
   });
 }
 
+function addAgendaIncomeToFinance(price, clientName, date, time) {
+  if (!price || Number(price) <= 0) return;
+
+  let financial = JSON.parse(localStorage.getItem('financial')) || {
+    total: 0,
+    expenses: [],
+    incomes: []
+  };
+
+  const value = Number(price);
+
+  financial.incomes.push({
+    value,
+    reason: `Agendamento: ${clientName} (${date} - ${time})`
+  });
+
+  financial.total += value;
+
+  localStorage.setItem('financial', JSON.stringify(financial));
+
+  // 🔔 AVISA O FINANCEIRO QUE MUDOU
+  window.dispatchEvent(new Event("financeUpdated"));
+}
+
+
+
 function saveSchedule() {
   const name = document.getElementById('clientName').value;
   const sizeValue = document.getElementById('size').value;
@@ -121,12 +147,15 @@ function saveSchedule() {
   }
 
   schedules[selectedDate][time] = {
-    name,
-    size: sizeValue,
-    price: priceValue
-  };
+  name,
+  size: sizeValue,
+  price: priceValue
+};
 
-  localStorage.setItem('schedules', JSON.stringify(schedules));
+localStorage.setItem('schedules', JSON.stringify(schedules));
+
+// 💰 ADICIONA COMO LUCRO AUTOMÁTICO
+addAgendaIncomeToFinance(priceValue, name, selectedDate, time);
 
   closeModal();
   renderCalendar();

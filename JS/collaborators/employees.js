@@ -1,119 +1,87 @@
-let employees = JSON.parse(localStorage.getItem('employees')) || [];
-let editingIndex = null;
+const nomeInput = document.getElementById("nomeEmploye");
+const sobrenomeInput = document.getElementById("sobrenomeEmploye");
+const idadeInput = document.getElementById("idadeEmploye");
+const setorInput = document.getElementById("setor");
+const cargoInput = document.getElementById("cargo");
 
-const table = document.getElementById('employeeTable');
-const totalEmployees = document.getElementById('totalEmployees');
-const totalPayroll = document.getElementById('totalPayroll');
-const modalEmploye = document.getElementById('modalEmploye');
+const btnNovo = document.getElementById("btnNovo");
+const modalEmploye = document.getElementById("modalEmploye");
+const fechar = document.getElementById("fechar");
+const form = document.getElementById("formFuncionario");
 
-function render() {
-  table.innerHTML = '';
-  let payroll = 0;
+/* 🔽 IMAGEM PADRÃO (MUDE AQUI) */
+const imagemPadrao = "../../img/inkito.png";
 
-  employees.forEach((e, i) => {
-    const tr = document.createElement('tr');
+btnNovo.onclick = () => modalEmploye.style.display = "flex";
+fechar.onclick = () => modalEmploye.style.display = "none";
 
-    if (e.status === 'Ativo') {
-      payroll += Number(e.salary) || 0;
-    }
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
 
-    tr.innerHTML = `
-      <td>${e.name}</td>
-      <td>${e.sector}</td>
-      <td>${e.role}</td>
-      <td>R$ ${Number(e.salary).toFixed(2)}</td>
-      <td>${e.status}</td>
-      <td class="actions">
-        <button onclick="editEmployee(${i})">✏️</button>
-        <button onclick="removeEmployee(${i})">🗑️</button>
-      </td>
-    `;
+  const nome = nomeInput.value;
+  const sobrenome = sobrenomeInput.value;
+  const idade = idadeInput.value;
+  const setor = setorInput.value;
+  const cargo = cargoInput.value;
+  const imagemInput = document.getElementById("imagem");
 
-    table.appendChild(tr);
-  });
+  let imagemFinal = imagemPadrao;
 
-  totalEmployees.innerText = employees.length;
-  totalPayroll.innerText = `R$ ${payroll.toFixed(2)}`;
+  if (imagemInput.files[0]) {
+    imagemFinal = URL.createObjectURL(imagemInput.files[0]);
+  }
 
-  localStorage.setItem('employees', JSON.stringify(employees));
-}
+  const card = document.createElement("div");
+  card.classList.add("cardEmploye");
 
+  card.innerHTML = `
+    <img src="${imagemFinal}">
+    <div class="info">
+      <h3>${nome} ${sobrenome}</h3>
+      <p>Idade: <span>${idade}</span></p>
+      <p>Cargo: <span>${cargo}</span></p>
 
-function openModalEmploye() {
-  editingIndex = null;
-  document.getElementById('modalEmployeTitle').innerText = 'Novo Funcionário';
-  clearForm();
-  modalEmploye.style.display = 'flex';
-}
+      <div class="acoes">
+        <button class="editar">Editar</button>
+        <button class="foto">Trocar foto</button>
+        <button class="excluir">Excluir</button>
+        <input type="file" accept="image/*" style="display:none">
+      </div>
+    </div>
+  `;
 
-function closeModalEmploye() {
-  modalEmploye.style.display = 'none';
-}
-
-function clearForm() {
-  ['name', 'sector', 'role', 'salary'].forEach(id =>
-    document.getElementById(id).value = ''
+  // ➜ Enviar para o setor correto
+  const setorDiv = document.querySelector(
+    `.setor[data-setor="${setor}"] .cardsEmploye`
   );
-  document.getElementById('status').value = 'Ativo';
-}
+  setorDiv.appendChild(card);
 
-function saveEmployee() {
-  const nameInput = document.getElementById('name');
-  const sectorInput = document.getElementById('sector');
-  const roleInput = document.getElementById('role');
-  const salaryInput = document.getElementById('salary');
-  const statusInput = document.getElementById('status');
-
-  const employee = {
-    name: nameInput.value.trim(),
-    sector: sectorInput.value.trim(),
-    role: roleInput.value.trim(),
-    salary: salaryInput.value.trim(),
-    status: statusInput.value
+  // 🗑️ EXCLUIR
+  card.querySelector(".excluir").onclick = () => {
+    card.remove();
   };
 
-  if (employee.name === '' || employee.salary === '') {
-    alert('Preencha nome e salário');
-    return;
-  }
+  // ✏️ EDITAR
+  card.querySelector(".editar").onclick = () => {
+    const novoCargo = prompt("Novo cargo:", cargo);
+    const novaIdade = prompt("Nova idade:", idade);
 
-  if (editingIndex === null) {
-    employees.push(employee);
-  } else {
-    employees[editingIndex] = employee;
-  }
+    if (novoCargo) card.querySelector("p:nth-child(3) span").innerText = novoCargo;
+    if (novaIdade) card.querySelector("p:nth-child(2) span").innerText = novaIdade;
+  };
 
-  closeModalEmploye();
-  render();
-}
+  // 🖼️ TROCAR FOTO
+  const btnFoto = card.querySelector(".foto");
+  const inputFoto = card.querySelector("input[type=file]");
+  const img = card.querySelector("img");
 
-function editEmployee(index) {
-  editingIndex = index;
-  const e = employees[index];
+  btnFoto.onclick = () => inputFoto.click();
+  inputFoto.onchange = () => {
+    if (inputFoto.files[0]) {
+      img.src = URL.createObjectURL(inputFoto.files[0]);
+    }
+  };
 
-  document.getElementById('name').value = e.name;
-  document.getElementById('sector').value = e.sector;
-  document.getElementById('role').value = e.role;
-  document.getElementById('salary').value = e.salary;
-  document.getElementById('status').value = e.status;
-
-  document.getElementById('modalEmployeTitle').innerText = 'Editar Funcionário';
-  modalEmploye.style.display = 'flex';
-}
-
-
-function removeEmployee(index) {
-  if (confirm('Remover funcionário?')) {
-    employees.splice(index, 1);
-    render();
-  }
-}
-
-function deleteEmployee() {
-  if (editingIndex !== null) {
-    removeEmployee(editingIndex);
-    closeModalEmploye();
-  }
-}
-
-render();
+  form.reset();
+  modalEmploye.style.display = "none";
+});

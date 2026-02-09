@@ -13,9 +13,9 @@ function getPayroll() {
 }
 
 function getAgendaIncome() {
-  const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
-  return appointments.reduce((sum, a) => sum + Number(a.value), 0);
+  return financial.incomes.reduce((sum, i) => sum + Number(i.value), 0);
 }
+
 
 function addExpense() {
   const value = Number(document.getElementById('expenseValue').value);
@@ -42,26 +42,49 @@ function addIncome() {
 }
 
 function render() {
-  const payroll = getPayroll();
-  const agendaIncome = getAgendaIncome();
+  // 🔁 recalcula total do zero
+  const totalIncomes = financial.incomes.reduce(
+    (sum, i) => sum + Number(i.value), 0
+  );
 
-  document.getElementById('payrollValue').innerText = `R$ ${payroll.toFixed(2)}`;
-  document.getElementById('agendaValue').innerText = `R$ ${agendaIncome.toFixed(2)}`;
+  const totalExpenses = financial.expenses.reduce(
+    (sum, e) => sum + Number(e.value), 0
+  );
 
-  document.getElementById('expenseList').innerHTML =
-    financial.expenses.map(e => `<li>- R$ ${e.value} | ${e.reason}</li>`).join('');
-
-  document.getElementById('incomeList').innerHTML =
-    financial.incomes.map(i => `<li>+ R$ ${i.value} | ${i.reason}</li>`).join('');
+  financial.total = totalIncomes - totalExpenses;
 
   document.getElementById('totalValue').innerText =
     `R$ ${financial.total.toFixed(2)}`;
+
+  document.getElementById('incomeList').innerHTML =
+    financial.incomes.map(i =>
+      `<li>+ R$ ${i.value} | ${i.reason}</li>`
+    ).join('');
+
+  document.getElementById('expenseList').innerHTML =
+    financial.expenses.map(e =>
+      `<li>- R$ ${e.value} | ${e.reason}</li>`
+    ).join('');
 }
+
 
 function save() {
   localStorage.setItem('financial', JSON.stringify(financial));
   render();
 }
+
+window.addEventListener("financeUpdated", () => {
+  financial = JSON.parse(localStorage.getItem('financial'));
+  render();
+});
+
+window.addEventListener("storage", (e) => {
+  if (e.key === "financial") {
+    financial = JSON.parse(localStorage.getItem("financial"));
+    render();
+  }
+});
+
 
 render();
 

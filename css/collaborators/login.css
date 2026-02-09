@@ -1,6 +1,15 @@
 
     :root {
       --shadow: 8px 8px 0px #FDBFD4;
+      --preto: #2E2E2E;
+  --marrom-claro: #BFAB93;
+  --Creme: #FFF3D0;
+  --Rosa: #E999BF; 
+  --Rosa-escuro: #B3146D; 
+  --Rosa-claro: #FDBFD4; 
+  --Azul-bebê: #D2DAF3;
+  --Roxo: #A395D9; 
+  --Azul: #AEB4E9;
     }
 
     * {
@@ -11,7 +20,8 @@
     }
 
     body {
-      background-color: #D2DAF3;
+      background-color: var(--Azul-bebê);
+      background-image: url('../../img/fundo.jpg');
       display: flex;
       justify-content: center;
       align-items: center;
@@ -23,12 +33,11 @@
     .login-container {
       width: 100%;
       max-width: 400px;
-      border: 1px solid #FDBFD4;
       padding: 40px 30px;
-      background-color: #FFF3D0;
-      box-shadow: var(--shadow);
+      background-color: var(--Rosa);
+      box-shadow: 6px 6px 6px 6px var(--Azul-bebê);
       position: relative;
-      border-radius: 12px;
+      border-radius: 20px;
     }
 
     .login-container::before {
@@ -72,7 +81,7 @@
     }
 
     input:focus {
-      box-shadow: 4px 4px 0px #2E2E2E;
+      box-shadow: 6px 6px 6px var(--Rosa-escuro);
     }
 
     button {
@@ -89,7 +98,7 @@
     }
 
     button:hover {
-      box-shadow: 4px 4px 0px #2E2E2E;
+      box-shadow: 6px 6px 6px var(--Rosa-escuro);
       transform: translate(-2px, -2px);
       background-color: #B3146D;
     }
